@@ -1,0 +1,4 @@
+﻿1;Beggin-Maneskin;Premier Niveau;
+2;Barbara-Pravi-Voilà;Difficulté normale;
+3;Mika-Elle-Me-Dit;Difficile;
+4;Barbara-Pravi-Voilà;Juste pour tester;
