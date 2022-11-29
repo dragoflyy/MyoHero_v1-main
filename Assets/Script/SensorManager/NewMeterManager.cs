@@ -6,50 +6,18 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System.IO;
 using UnityEditor;
-
-
-
-
-public class SimpleMovingAverage // classe filtre moyenne glissante.
-{
-    private readonly int _k;
-    private readonly float[] _values;
-
-    private int _index = 0;
-    private float _sum = 0;
-
-    public SimpleMovingAverage(int k)
-    {
-
-        _k = k;
-        _values = new float[k];
-    }
-
-    public double Update(float nextInput)
-    {
-        _sum = _sum - _values[_index] + nextInput;
-
-        _values[_index] = nextInput;
-
-        _index = (_index + 1) % _k;
-
-        return ((double)_sum) / _k;
-    }
-}
-
-
+using System.IO.Ports;
 
 
     namespace QualisysRealTime.Unity
 {
-    class MeterManager : MonoBehaviour
+    class NewMeterManager : MonoBehaviour
     {
         public string place;
         public string ChannelName = "";
         public int number;
         public bool isContracted = false;
         public float delay = 0.1f;
-        protected RTClient rtClient;
         public float seuil_high = 50.0f;
         public float seuil_low = 10;
         public float offset = 0;
@@ -64,12 +32,18 @@ public class SimpleMovingAverage // classe filtre moyenne glissante.
         public bool bo_Aff_val = false;
         float maximum = 1;
         float val_extr=0, val_f_ext=0;
+        SerialPort sp;
 
         void Start()
         {
             // try to load settings.
             string name = this.name;
             ChannelName = PlayerPrefs.GetString("AnalogSource" + name.Substring(name.Length - 1, 1));
+
+            sp = new SerialPort("COM4", 115200);
+            sp.Open();
+            sp.ReadTimeout = 1;
+
             if (PlayerPrefs.GetFloat("sh" + place) != 0)
                 seuil_high = PlayerPrefs.GetFloat("sh" + place);
             if (PlayerPrefs.GetFloat("sl" + place) != 0)
@@ -81,7 +55,6 @@ public class SimpleMovingAverage // classe filtre moyenne glissante.
             if (float.IsNaN(max))
                 max = 1;
 
-            rtClient = RTClient.GetInstance();
             ok = GameObject.Find("Text"+number.ToString());
             jauge = transform.Find("Jauge").gameObject;
             text_val = GameObject.Find("Text_val" + number.ToString());
@@ -99,43 +72,41 @@ public class SimpleMovingAverage // classe filtre moyenne glissante.
                 ok.GetComponent<Text>().color = new Color(0, 243, 0);
             else 
                 ok.GetComponent<Text>().color = new Color(243, 0, 0);
-            if (rtClient == null) rtClient = RTClient.GetInstance();
-            var channel = rtClient.GetAnalogChannel(ChannelName);
-            if (channel != null)
+            try
             {
-                foreach (var value in channel.Values)
+                float value = float.Parse(sp.ReadLine());
+                double val = calculator.Update(Mathf.Abs(value - offset));
+                if (double.IsNaN(val))
+                    val = 0;
+                val_f_ext = (float)val;
+                if (!bo_Aff_val)
+                    StartCoroutine(Aff_val(val));
+                x = 7 * ((float)val / max);
+                jauge.transform.localScale = new Vector3(0.97f, x, 1);
+                jauge.transform.localPosition = new Vector3(0, x / 2 - 7.3f / 2, 0);
+                somme1++;
+                if (relax)
+                    somme2 += (float)value;
+                else
+                    somme2 += (float)val;
+                if (val > maximum)
                 {
-                    val_extr = value;
-                    valeur = value;
-                    //print(offset);
-                    double val = calculator.Update(Mathf.Abs(value - offset));
-                    //print("val : "+val.ToString());
-                    if (double.IsNaN(val))
-                        val = 0;
-                    val_f_ext = (float)val;
-                    if (!bo_Aff_val)
-                        StartCoroutine(Aff_val(val));
-
-                    x = 7*((float)val / max);
-                    jauge.transform.localScale = new Vector3(0.97f, x, 1);
-                    jauge.transform.localPosition = new Vector3(0, x / 2 - 7.3f / 2, 0);
-                    somme1++;
-                    if (relax)
-                        somme2 += (float)value;
-                    else
-                        somme2 += (float)val;
-                    if (val > maximum)
-                    {
-                        maximum = (float)val;
-                    }
-                    if (!relax && !on_tst && !isContracted && val > seuil_high)
-                    {
-                        isContracted = true;
-                        StartCoroutine(Contraction());
-
-                    }
+                    maximum = (float)val;
                 }
-            }
+                if (!relax && !on_tst && !isContracted && val > seuil_high)
+                {
+                    isContracted = true;
+                    StartCoroutine(Contraction());
+
+                }
+            } catch (System.Exception ex) { Debug.Log(ex); }
+
+        }
+
+        public void OnApplicationQuit()
+        {
+            Debug.Log("Closing connection");
+            sp.Close();
         }
 
         void Calc_Offset()

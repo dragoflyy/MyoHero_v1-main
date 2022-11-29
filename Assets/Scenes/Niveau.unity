@@ -557,6 +557,11 @@ PrefabInstance:
       propertyPath: place
       value: DD
       objectReference: {fileID: 0}
+    - target: {fileID: 10372227373696837, guid: c8f7091efd45c3c46a79bbcd88e74219,
+        type: 3}
+      propertyPath: serial
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 10372227373696843, guid: c8f7091efd45c3c46a79bbcd88e74219,
         type: 3}
       propertyPath: m_Name
@@ -2493,6 +2498,11 @@ PrefabInstance:
       propertyPath: place
       value: GD
       objectReference: {fileID: 0}
+    - target: {fileID: 10372227373696837, guid: c8f7091efd45c3c46a79bbcd88e74219,
+        type: 3}
+      propertyPath: serial
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 10372227373696843, guid: c8f7091efd45c3c46a79bbcd88e74219,
         type: 3}
       propertyPath: m_Name
@@ -2869,6 +2879,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1085399473}
   - component: {fileID: 1085399474}
+  - component: {fileID: 1085399475}
   m_Layer: 0
   m_Name: Jauges
   m_TagString: Untagged
@@ -2919,6 +2930,18 @@ MonoBehaviour:
   objs_d:
   - {fileID: 362163814}
   - {fileID: 775397744}
+--- !u!114 &1085399475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085399472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa6ed5d7e41b53d4b86654c9379b13fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1114138658
 GameObject:
   m_ObjectHideFlags: 0
@@ -3150,6 +3173,11 @@ PrefabInstance:
         type: 3}
       propertyPath: place
       value: GG
+      objectReference: {fileID: 0}
+    - target: {fileID: 10372227373696837, guid: c8f7091efd45c3c46a79bbcd88e74219,
+        type: 3}
+      propertyPath: serial
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 10372227373696843, guid: c8f7091efd45c3c46a79bbcd88e74219,
         type: 3}
@@ -5054,6 +5082,16 @@ PrefabInstance:
         type: 3}
       propertyPath: place
       value: DG
+      objectReference: {fileID: 0}
+    - target: {fileID: 10372227373696837, guid: c8f7091efd45c3c46a79bbcd88e74219,
+        type: 3}
+      propertyPath: serial
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10372227373696837, guid: c8f7091efd45c3c46a79bbcd88e74219,
+        type: 3}
+      propertyPath: nb
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 10372227373696843, guid: c8f7091efd45c3c46a79bbcd88e74219,
         type: 3}

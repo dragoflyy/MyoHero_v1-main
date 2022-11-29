@@ -228,6 +228,16 @@ PrefabInstance:
       propertyPath: place
       value: DG
       objectReference: {fileID: 0}
+    - target: {fileID: 10372227373696837, guid: c8f7091efd45c3c46a79bbcd88e74219,
+        type: 3}
+      propertyPath: serial
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10372227373696837, guid: c8f7091efd45c3c46a79bbcd88e74219,
+        type: 3}
+      propertyPath: nb
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 10372227373696843, guid: c8f7091efd45c3c46a79bbcd88e74219,
         type: 3}
       propertyPath: m_Name
@@ -5662,6 +5672,7 @@ GameObject:
   - component: {fileID: 1430204300}
   - component: {fileID: 1430204299}
   - component: {fileID: 1430204301}
+  - component: {fileID: 1430204302}
   m_Layer: 0
   m_Name: Jauges
   m_TagString: Untagged
@@ -5725,6 +5736,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: 32
+--- !u!114 &1430204302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430204298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa6ed5d7e41b53d4b86654c9379b13fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1438052959 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 830402386148607650, guid: e2ca90d1f55a3584ca197c7c026168e0,
@@ -6690,6 +6713,11 @@ PrefabInstance:
         type: 3}
       propertyPath: place
       value: GG
+      objectReference: {fileID: 0}
+    - target: {fileID: 10372227373696837, guid: c8f7091efd45c3c46a79bbcd88e74219,
+        type: 3}
+      propertyPath: serial
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 10372227373696843, guid: c8f7091efd45c3c46a79bbcd88e74219,
         type: 3}
