@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO.Ports;
 using JetBrains.Annotations;
+using System.Threading;
 
 public class ArduinoLink : MonoBehaviour
 {
@@ -12,9 +13,35 @@ public class ArduinoLink : MonoBehaviour
     void Start()
     {
         Values = new float[] { 0, 0 };
-        sp = new SerialPort("COM7", 115200);
-        sp.Open();
-        sp.ReadTimeout = 1;
+        string[] pn = SerialPort.GetPortNames();
+        foreach(string pns in pn)
+        {
+            try
+            {
+                sp = new SerialPort(pns, 115200);
+                sp.Open();
+                sp.ReadTimeout = 1;
+                Debug.Log("connected to " + pns);
+
+                bool coo = false;
+
+                for (int iii = 0; iii < 50; iii++)
+                {
+                    try
+                    {
+                        sp.ReadLine();
+                        Debug.Log("connected ! ");
+                        coo = true;
+                        break;
+                    }
+                    catch { }
+                    Thread.Sleep(10);
+                }
+                if (!coo)
+                { sp.Close(); }
+                else { break; }
+            } catch (System.Exception ex) { Debug.Log("error : "+ex); }
+        }
     }
 
     // Update is called once per frame
