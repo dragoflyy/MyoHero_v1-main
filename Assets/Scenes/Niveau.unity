@@ -3800,7 +3800,7 @@ PrefabInstance:
     - target: {fileID: 1410450701542005494, guid: e2ca90d1f55a3584ca197c7c026168e0,
         type: 3}
       propertyPath: isEMG
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1410450701542005494, guid: e2ca90d1f55a3584ca197c7c026168e0,
         type: 3}
@@ -5423,7 +5423,7 @@ PrefabInstance:
     - target: {fileID: 1410450701542005494, guid: e2ca90d1f55a3584ca197c7c026168e0,
         type: 3}
       propertyPath: isEMG
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1410450701542005494, guid: e2ca90d1f55a3584ca197c7c026168e0,
         type: 3}

@@ -7,10 +7,11 @@ using JetBrains.Annotations;
 public class ArduinoLink : MonoBehaviour
 {
     SerialPort sp;
-    float[] Values = new float[2];
+    float[] Values = new float[2], av;
     // Start is called before the first frame update
     void Start()
     {
+        Values = new float[] { 0, 0 };
         sp = new SerialPort("COM7", 115200);
         sp.Open();
         sp.ReadTimeout = 1;
@@ -37,15 +38,17 @@ public class ArduinoLink : MonoBehaviour
         }
         catch (System.Exception ex) 
         {
-            for (int k = 0; k<2; k++)
-                Values[k] = 0; 
-            Debug.Log("error : " + ex); 
+            Values = av; 
+            //Debug.Log("error : " + ex); 
         }
+        av = Values;
     }
 
     public float GetValueChannel(int channel)
     {
-        return Values[channel];
+        if (Values != null)
+            return Values[channel];
+        return 0;
     }
 
     void OnApplicationQuit()

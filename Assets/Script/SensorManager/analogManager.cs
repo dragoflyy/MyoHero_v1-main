@@ -134,6 +134,7 @@ public class analogManager : MonoBehaviour
         {
             objet.GetComponent<MeterManager>().Relax(false);
         }
+        float height = Camera.current.rect.height;
     }
 
     public void Start_contract1()

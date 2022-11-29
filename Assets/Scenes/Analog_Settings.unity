@@ -6719,6 +6719,11 @@ PrefabInstance:
       propertyPath: serial
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 10372227373696837, guid: c8f7091efd45c3c46a79bbcd88e74219,
+        type: 3}
+      propertyPath: nb
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 10372227373696843, guid: c8f7091efd45c3c46a79bbcd88e74219,
         type: 3}
       propertyPath: m_Name

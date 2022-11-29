@@ -76,7 +76,10 @@ public class SimpleMovingAverage // classe filtre moyenne glissante.
             string name = this.name;
             ChannelName = PlayerPrefs.GetString("AnalogSource" + name.Substring(name.Length - 1, 1));
             if (PlayerPrefs.GetFloat("sh" + place) != 0)
+            {
                 seuil_high = PlayerPrefs.GetFloat("sh" + place);
+                Debug.Log("seuil setted : " + seuil_high);
+            }
             if (PlayerPrefs.GetFloat("sl" + place) != 0)
                 seuil_low = PlayerPrefs.GetFloat("sl" + place);
             if (PlayerPrefs.GetFloat("offset" + place) != 0)
@@ -105,11 +108,12 @@ public class SimpleMovingAverage // classe filtre moyenne glissante.
 
         void Update()
         {
+            if (nb == 1)
+                Debug.Log("s = "+seuil_high + " " + maximum);
             if (serial)
             {
                 float value = this.transform.parent.GetComponent<ArduinoLink>().GetValueChannel(nb);
-                Debug.Log(value);
-                double val = calculator.Update(Mathf.Abs(value));
+                double val = calculator.Update(Mathf.Abs(value - offset));
                 if (double.IsNaN(val))
                     val = 0;
                 val_f_ext = (float)val;
@@ -130,6 +134,7 @@ public class SimpleMovingAverage // classe filtre moyenne glissante.
                 }
                 if (!relax && !on_tst && !isContracted && val > seuil_high)
                 {
+                    Debug.Log("seuil_high");
                     isContracted = true;
                     StartCoroutine(Contraction());
 
@@ -170,9 +175,11 @@ public class SimpleMovingAverage // classe filtre moyenne glissante.
                         if (val > maximum)
                         {
                             maximum = (float)val;
+                            Debug.Log("maximum = " + maximum);
                         }
                         if (!relax && !on_tst && !isContracted && val > seuil_high)
                         {
+                            Debug.Log("active !");
                             isContracted = true;
                             StartCoroutine(Contraction());
 
@@ -184,10 +191,15 @@ public class SimpleMovingAverage // classe filtre moyenne glissante.
 
         void Calc_Offset()
         {
+            if (nb == 1)
+                Debug.Log("stat " + (somme2 / somme1) + " "+ somme1 + " " + somme2);
             offset = somme2 / somme1;
             if (double.IsNaN(offset))
                 offset = 0;
             PlayerPrefs.SetFloat("offset" + place, offset);
+
+            if (nb == 1)
+                Debug.Log("stat " + offset);
         }
 
         public void Relax(bool start)
@@ -214,6 +226,8 @@ public class SimpleMovingAverage // classe filtre moyenne glissante.
             PlayerPrefs.SetFloat("sh" + place, seuil_high);
             PlayerPrefs.SetFloat("sl" + place, seuil_low);
             PlayerPrefs.SetFloat("maxb" + place, max);
+            if (nb == 1)
+                Debug.Log("stt = " + maximum + " " + seuil_high + " " + seuil_low);
         }
 
         public void Seuils(bool start)
