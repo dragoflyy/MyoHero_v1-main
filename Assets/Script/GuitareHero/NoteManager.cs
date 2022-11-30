@@ -30,7 +30,8 @@ public class NoteManager : MonoBehaviour
 
             float pos_win = float.Parse(pos_win_str);
             load_notes("G", pos_g1, pos_g2);
-            load_notes("D", pos_g1, pos_g2);
+            if (PlayerPrefs.GetInt("Solo") == 0)
+                load_notes("D", pos_g1, pos_g2);
             Object Winnote = AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Winnote.prefab", typeof(GameObject));
             Vector3 pos = new Vector3(0, pos_win, 0);
             GameObject copy = Instantiate(Winnote, pos, Quaternion.identity) as GameObject;

@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     DateTime Start_time,PauseTime;
     TimeSpan Decalage;
     public bool create = false;
+    public GameObject[] ToErase;
 
     void Start()
     {
@@ -55,6 +56,19 @@ public class GameManager : MonoBehaviour
             texte.SetActive(false);
             analog_manager = GameObject.Find("Jauges");
             b1 = GameObject.Find("Button_start");
+        }
+        else
+        {
+            if (PlayerPrefs.GetInt("Solo") == 1)
+            {
+                foreach (GameObject o in ToErase)
+                    o.SetActive(false);
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                GameObject.Find("Cache").SetActive(false);
+            }
         }
             try
             {
