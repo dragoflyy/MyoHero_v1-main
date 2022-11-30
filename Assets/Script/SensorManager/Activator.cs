@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using QualisysRealTime.Unity;
-
+using UnityEngine.UI;
 
 public class Activator : MonoBehaviour
 {
@@ -16,7 +16,7 @@ public class Activator : MonoBehaviour
     private bool wasConctracted = false;
     public bool Reset_if_fail = false;
     public bool Creation_mode = false;
-    public GameObject Note;
+    public GameObject Note, Text;
     GameObject list_notes;
     public string act_side;
 
@@ -32,10 +32,15 @@ public class Activator : MonoBehaviour
         Reset_if_fail = (PlayerPrefs.GetInt("Allow_cocontractions") == 0);
         list_notes = GameObject.Find("Notes_list_"+act_side);
         if (cote == 0)
+        {
             gm = GameObject.Find("GameManagerG");
+        }
         else
+        {
             gm = GameObject.Find("GameManagerD");
+        }
         old = sr.color;
+        Text.SetActive(false);
     }
 
     // Update is called once per frame
@@ -65,8 +70,10 @@ public class Activator : MonoBehaviour
 
                         if (active)
                         {
-                            Destroy(note);
+                            StartCoroutine(note.GetComponent<Note>().Delete());
                             gm.GetComponent<GameManager>().AddStreak(cote, act_side);
+                            if (gm.GetComponent<GameManager>().GetStreak() % 3 == 0)
+                                StartCoroutine(Greet());
                             AddScore();
                             active = false;
                         }
@@ -114,6 +121,28 @@ public class Activator : MonoBehaviour
         sr.color = new Color(0, 0, 0);
         yield return new WaitForSeconds(0.05f);
         sr.color = old;
+    }
+
+    IEnumerator Greet()
+    {
+        Text.SetActive(true);
+        int iniS = Text.GetComponent<Text>().fontSize, ts = Text.GetComponent<Text>().fontSize;
+        Color iniC = Text.GetComponent<Text>().color, tC = Text.GetComponent<Text>().color;
+        for (int kk = 0; kk < 20; kk++)
+        {
+            ts += 1;
+            tC.a -= 0.02f;
+
+            Text.GetComponent<Text>().fontSize = ts;
+            Text.GetComponent<Text>().color = tC;
+
+            yield return new WaitForSeconds(0.02f);
+        }
+
+        Text.GetComponent<Text>().fontSize = iniS;
+        Text.GetComponent<Text>().color = iniC;
+
+        Text.SetActive(false); ;
     }
 
 

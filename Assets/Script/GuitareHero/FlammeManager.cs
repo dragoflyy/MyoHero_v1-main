@@ -28,13 +28,13 @@ public class FlammeManager : MonoBehaviour
     public void Set_a(float val)
     {
         old = sr.color;
-        old[3] = (val)/15;
+        old[3] = (val)/5;
         sr.color = old;
     }
 
     IEnumerator decrease(Color old, float val)
     {
-        while (old[3] >= val / 15)
+        while (old[3] >= val / 5)
         {
             old[3] -= 0.03f;
             sr.color = old;

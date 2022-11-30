@@ -185,7 +185,7 @@ public class GameManager : MonoBehaviour
         }
         bkground.GetComponent<BackgroundManager>().Activate((PlayerPrefs.GetInt("StreakG") + PlayerPrefs.GetInt("StreakD")) / 2);
         flamme_long.GetComponent<FlammeManager>().Activate((PlayerPrefs.GetInt("StreakG") + PlayerPrefs.GetInt("StreakD"))/2);
-        if (streak[cote] % 20 == 0)
+        if (streak[cote] % 10 == 0)
             Explode.GetComponent<ExplodeScript>().Activate();
 
         if (streak[cote] > PlayerPrefs.GetInt("HighStreak"+Side))
@@ -195,6 +195,10 @@ public class GameManager : MonoBehaviour
        
     }
 
+    public int GetStreak()
+    {
+        return streak[cote];
+    }
 
     public void ResetStreak(int cote)
     {

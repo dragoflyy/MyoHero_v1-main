@@ -18,28 +18,40 @@ public class ArduinoLink : MonoBehaviour
         {
             try
             {
-                sp = new SerialPort(pns, 115200);
-                sp.Open();
-                sp.ReadTimeout = 1;
-                Debug.Log("connected to " + pns);
+                System.DateTime N = System.DateTime.Now;
+                sp = null;
+                bool timeout = true;
 
-                bool coo = false;
+                Thread t = new Thread(()=>{ sp = new SerialPort(pns, 115200); timeout = false; });
+                t.Start();
 
-                for (int iii = 0; iii < 50; iii++)
+                while ((System.DateTime.Now - N).Seconds < 5) { }
+                t.Interrupt();
+
+                if (!timeout)
                 {
-                    try
+                    sp.Open();
+                    sp.ReadTimeout = 1;
+                    Debug.Log("connected to " + pns);
+
+                    bool coo = false;
+
+                    for (int iii = 0; iii < 50; iii++)
                     {
-                        sp.ReadLine();
-                        Debug.Log("connected ! ");
-                        coo = true;
-                        break;
+                        try
+                        {
+                            sp.ReadLine();
+                            Debug.Log("connected ! ");
+                            coo = true;
+                            break;
+                        }
+                        catch { }
+                        Thread.Sleep(10);
                     }
-                    catch { }
-                    Thread.Sleep(10);
+                    if (!coo)
+                    { sp.Close(); }
+                    else { break; }
                 }
-                if (!coo)
-                { sp.Close(); }
-                else { break; }
             } catch (System.Exception ex) { Debug.Log("error : "+ex); }
         }
     }
