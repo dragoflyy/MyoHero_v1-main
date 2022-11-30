@@ -108,8 +108,6 @@ public class SimpleMovingAverage // classe filtre moyenne glissante.
 
         void Update()
         {
-            if (nb == 1)
-                Debug.Log("s = "+seuil_high + " " + maximum);
             if (serial)
             {
                 float value = this.transform.parent.GetComponent<ArduinoLink>().GetValueChannel(nb);

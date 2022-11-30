@@ -25,7 +25,7 @@ public class ArduinoLink : MonoBehaviour
                 Thread t = new Thread(()=>{ sp = new SerialPort(pns, 115200); timeout = false; });
                 t.Start();
 
-                while ((System.DateTime.Now - N).Seconds < 5) { }
+                while ((System.DateTime.Now - N).Seconds < 2) { }
                 t.Interrupt();
 
                 if (!timeout)
@@ -36,7 +36,7 @@ public class ArduinoLink : MonoBehaviour
 
                     bool coo = false;
 
-                    for (int iii = 0; iii < 50; iii++)
+                    for (int iii = 0; iii < 5; iii++)
                     {
                         try
                         {

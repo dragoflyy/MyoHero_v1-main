@@ -2384,6 +2384,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1742936895}
   - component: {fileID: 1742936894}
+  - component: {fileID: 1742936896}
   m_Layer: 0
   m_Name: LOGO FOND NOIR
   m_TagString: Untagged
@@ -2449,12 +2450,33 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1742936893}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 662.1, y: 210.2, z: 0}
-  m_LocalScale: {x: 24.988186, y: 21.865473, z: 1}
+  m_LocalPosition: {x: 5.7, y: -0.3, z: 0}
+  m_LocalScale: {x: 0.57399344, y: 0.5941242, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1742936896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742936893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c79eb42b87a33a47b0894146af821d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ToErase:
+  - {fileID: 376204320}
+  - {fileID: 159431723}
+  - {fileID: 572691878}
+  - {fileID: 990135575}
+  - {fileID: 711909240}
+  - {fileID: 989431022}
+  - {fileID: 654509125}
+  Back: {fileID: 1742936893}
 --- !u!1 &2035000690
 GameObject:
   m_ObjectHideFlags: 0

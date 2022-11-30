@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Analog_Settings.unity
     guid: 3b334f076baff6d4183f4a66a4301d39
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 6256a57eeb3e9fc4ba8779fd315e2520
+  - enabled: 1
+    path: Assets/Scenes/Jauge.unity
+    guid: 6dc61558d2ebacf45ba14b3d4605a32c
   m_configObjects: {}

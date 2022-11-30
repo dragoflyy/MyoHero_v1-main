@@ -67,6 +67,7 @@ public class Activator : MonoBehaviour
                     if ((Input.GetKeyDown(key) && !isEMG) || (isEMG && analog.GetComponent<MeterManager>().isContracted))
                     {
                         StartCoroutine(Pressed());
+                        //gm.GetComponent<GameManager>().AddContraction(cote, act_side);
 
                         if (active)
                         {
@@ -95,6 +96,7 @@ public class Activator : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col) {
         if (col.gameObject.tag == "Winnote" && cote == 0 && act_side == "D")
         {
+            Debug.Log("Winnote trouveee");
             gm.GetComponent<GameManager>().Win();
         }
         if (col.gameObject.tag == "Note")

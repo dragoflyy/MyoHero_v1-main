@@ -98,8 +98,10 @@
      <Compile Include="Assets\Script\GuitareHero\NoteManager.cs" />
      <Compile Include="Assets\Script\GuitareHero\Note_Creator.cs" />
      <Compile Include="Assets\Script\GuitareHero\PPText.cs" />
+     <Compile Include="Assets\Script\GuitareHero\ResultManager.cs" />
      <Compile Include="Assets\Script\GuitareHero\RockMeter.cs" />
      <Compile Include="Assets\Script\GuitareHero\SoundManager.cs" />
+     <Compile Include="Assets\Script\Jauge\DefiManager.cs" />
      <Compile Include="Assets\Script\MainMenu\MenuScroll.cs" />
      <Compile Include="Assets\Script\MainMenu\Toogle_Solo.cs" />
      <Compile Include="Assets\Script\MainMenu\Toogle_co.cs" />
@@ -111,6 +113,7 @@
      <Compile Include="Assets\Script\SensorManager\NewMeterManager.cs" />
      <Compile Include="Assets\Script\SensorManager\analogManager.cs" />
      <Compile Include="Assets\Script\Test.cs" />
+     <None Include="Assets\GuitareHero_Lvl\Niveaux\5.txt" />
      <None Include="Assets\GuitareHero_Lvl\Niveaux\3.txt" />
      <None Include="Assets\GuitareHero_Lvl\Niveaux.txt" />
      <None Include="Assets\GuitareHero_Lvl\Niveaux\2.txt" />

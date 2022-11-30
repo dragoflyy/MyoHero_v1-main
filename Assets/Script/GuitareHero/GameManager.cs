@@ -126,6 +126,8 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("NotesHit", 0);
             PlayerPrefs.SetInt("NotesHitG" + Side, 0);
             PlayerPrefs.SetInt("NotesHitD" + Side, 0);
+            PlayerPrefs.SetInt("ContractionsG" + Side, 0);
+            PlayerPrefs.SetInt("ContractionsD" + Side, 0);
             flamme_long = GameObject.Find("flame_long");
             flammes = GameObject.FindGameObjectsWithTag("Flammes" + Side);
             bkground = GameObject.Find("Background");
@@ -191,8 +193,11 @@ public class GameManager : MonoBehaviour
         if (streak[cote] > PlayerPrefs.GetInt("HighStreak"+Side))
             PlayerPrefs.SetInt("HighStreak"+Side, streak[cote]);
 
-        
-       
+    }
+
+    public void AddContraction(int cote, string act_side)
+    {
+        PlayerPrefs.SetInt("Contractions" + act_side + Side, PlayerPrefs.GetInt("Contractions" + act_side + Side) + 1);
     }
 
     public int GetStreak()
@@ -241,7 +246,7 @@ public class GameManager : MonoBehaviour
         }
 
         float sh1 = GameObject.Find("Meter3").GetComponent<MeterManager>().seuil_high, sh2 = GameObject.Find("Meter4").GetComponent<MeterManager>().seuil_high;
-        float o1 = GameObject.Find("Meter3").GetComponent<MeterManager>().offset, o2 = GameObject.Find("Meter2").GetComponent<MeterManager>().offset;
+        float o1 = GameObject.Find("Meter3").GetComponent<MeterManager>().offset, o2 = GameObject.Find("Meter4").GetComponent<MeterManager>().offset;
 
         scores.Add("1;" +Score_ind.ToString()+";"+ notes_hit.ToString() + ";" + ratio1.ToString() + ";" + o1.ToString() + ";" + sh1.ToString() + ";" + ratio2.ToString() + ";" + o2.ToString() + ";" + sh2.ToString());
 
@@ -257,12 +262,18 @@ public class GameManager : MonoBehaviour
             ratio1 = 0;
             ratio2 = 0;
         }
-        sh1 = GameObject.Find("Meter1").GetComponent<MeterManager>().seuil_high;
-        sh2 = GameObject.Find("Meter2").GetComponent<MeterManager>().seuil_high;
-        o1 = GameObject.Find("Meter1").GetComponent<MeterManager>().offset;
-        o2 = GameObject.Find("Meter2").GetComponent<MeterManager>().offset;
+        if (PlayerPrefs.GetInt("Solo") == 0)
+        {
+            sh1 = GameObject.Find("Meter1").GetComponent<MeterManager>().seuil_high;
+            sh2 = GameObject.Find("Meter2").GetComponent<MeterManager>().seuil_high;
+            o1 = GameObject.Find("Meter1").GetComponent<MeterManager>().offset;
+            o2 = GameObject.Find("Meter2").GetComponent<MeterManager>().offset;
+        }
+        else
+        {
+            sh1 = 200; sh2 = 200; o1 = 50; o2 = 50;
+        }
         scores.Add("2;" + Score_ind.ToString() + ";" + notes_hit.ToString() + ";" + ratio1.ToString() + ";" + o1.ToString() + ";" + sh1.ToString() + ";" + ratio2.ToString() + ";" + o2.ToString() + ";" + sh2.ToString());
-
         analog_manager.GetComponent<analogManager>().Save_all(scores);
 
         PlayerPrefs.SetInt("Start", 0);
